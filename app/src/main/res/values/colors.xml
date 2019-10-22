@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="blue">#ff1712e6</color>
+    <color name="voilet">#9f83c6</color>
+    <color name="Yellow">#bfe179</color>
+    <color name="red">#f4716a</color>
+    <color name="black">#000000</color>
+
+    <color name="head_bottom_blue_color">#6fa6e6</color>
+    <color name="back_btn_stroke_color">#9DD1F0</color>
+    <color name="back_btn_bg_pressed">#ff4abcff</color>
+    <color name="circle_bg">#3D8FBF</color>
+    <color name="red_origin">#e9716b</color>
+    <color name="realgreen">#5dc158</color>
+    <color name="green">#00ff00</color>
+    <color name="orange">#ffa500</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="radio_button_selected_color">@color/head_bottom_blue_color</color>
+
+    <color name="btnselected">#1eac95</color>
+    <color name="gray">#999999</color>
+
+
+    <color name="green2">#7bbe0b</color>
+    <color name="red2">#e72525</color>
+    <color name="gray2">#989898</color>
+
+    <string-array name="colors1">
+        <item>#F2D06B</item>
+        <item>#CAF1E7</item>
+        <item>#F28705</item>
+        <item>#BFA27E</item>
+        <item>#0b1aa4</item>
+
+        <item>#BF1A0B</item>
+        <item>#590202</item>
+        <item>#BBBF34</item>
+        <item>#038C17</item>
+        <item>#2E707B</item>
+
+        <item>#5CC9CB</item>
+        <item>#F15441</item>
+        <item>#f1e901</item>
+        <item>#0ede11</item>
+        <item>#a4a7a4</item>
+
+        <item>#93063a</item>
+        <item>#c7a499</item>
+        <item>#09fffb</item>
+        <item>#22afad</item>
+
+        <item>#d6b963</item>
+        <item>#8cbeb1</item>
+        <item>#bf700f</item>
+        <item>#bf9a6b</item>
+        <item>#071276</item>
+
+        <item>#3aaac1</item>
+        <item>#97a13b</item>
+        <item>#52d20e</item>
+        <item>#3be754</item>
+        <item>#1d444b</item>
+
+        <item>#6ef7ec</item>
+        <item>#baf15441</item>
+        <item>#949007</item>
+        <item>#a611a943</item>
+        <item>#828482</item>
+
+        <item>#9f2e58</item>
+        <item>#c7b6a7</item>
+        <item>#90a1df</item>
+        <item>#5dc158</item>
+    </string-array>
+
+    <color name="gray1">#dddddd</color>
+
+    <!-- Colors for Inventory -->
+    <color name="light_green">#00ff00</color>
+    <color name="deep_green">#014601</color>
+    <color name="light_blue">#32baf4</color>
+    <color name="deep_blue">#ff1712e6</color>
+    <color name="purple">#661a70</color>
+    <color name="light_red">#df264b</color>
+    <color name="deep_red">#6c050c</color>
+    <color name="gold">#d19b06</color>
+    <color name="deep_brown">#4d2302</color>
+
+
+</resources>

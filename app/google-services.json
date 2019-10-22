@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "547114182811",
+    "firebase_url": "https://famdictionary-9d258.firebaseio.com",
+    "project_id": "famdictionary-9d258",
+    "storage_bucket": "famdictionary-9d258.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547114182811:android:91ba571152145b1655fe3e",
+        "android_client_info": {
+          "package_name": "com.example.famdictionary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547114182811-p2d1qbkch3og8v7hki5es2u5pnbbetri.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.famdictionary",
+            "certificate_hash": "19bab9e34511ff09b886768d402b70d3e9b5aa17"
+          }
+        },
+        {
+          "client_id": "547114182811-gafh0q0h6j6kn922t18gsvf854gojkm6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj-QTfNCyBrevA4lFAMNwVCHaM5XJ-Ajw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547114182811-gafh0q0h6j6kn922t18gsvf854gojkm6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

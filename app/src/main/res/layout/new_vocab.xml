@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Word"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="All definitions here were written by people like you. It's your turn to add"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/new_word"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New Word"
+        android:lines="3"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="All definitions here were written by people like you. It's your turn to add"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/word_def"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="3"
+        android:hint="Type your definition here....."
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/word_ex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="3"
+        android:hint="Example of how word can be used."
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thank you for adding. Hit Submit to be a part of this great community"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/upload_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Submit"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
