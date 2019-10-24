@@ -75,24 +75,10 @@ public class HomeFragment extends Fragment {
 
     public void viewWords(String newWrd){
         LayoutInflater inflater = LayoutInflater.from(getContext());
-//        LayoutInflater inflater1 = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.dict_words,llayout,false);
-//        View view2 = inflater1.inflate(R.layout.big_letter,llayout,false);
         final TextView DictWord = view.findViewById(R.id.word);
-//        final TextView K_letter = view2.findViewById(R.id.K_sort);
-        char first_letter = newWrd.charAt(0);
 
-        switch (first_letter){
-            case 'A':
-                DictWord.setText(newWrd);
-                break;
-            case 'K':
-                DictWord.setText(newWrd);
-            default:
-                break;
-        }
-
-//        llayout.addView(view2);
+        DictWord.setText(newWrd);
         llayout.addView(view);
     }
 
@@ -136,8 +122,8 @@ public class HomeFragment extends Fragment {
 
                             }
                         }
-                        String wordlist = someWordlist.get(s);
-                        viewWords(wordlist);
+                        String word_list = someWordlist.get(s);
+                        viewWords(word_list);
                         Log.d("word",someWordlist.get(s));
                     }
 

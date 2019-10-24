@@ -58,6 +58,7 @@ public class new_vocab extends AppCompatActivity {
             public void onClick(View view) {
 
                 uploadToDic(newWord.getText().toString(),wordDef.getText().toString(),wordEx.getText().toString());
+
 //                Intent intent = new Intent(new_vocab.this,HomeFragment.class);
 //                startActivity(intent);
 //                finish();
