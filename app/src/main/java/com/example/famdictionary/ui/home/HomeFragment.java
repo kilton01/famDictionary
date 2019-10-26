@@ -29,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class HomeFragment extends Fragment {
     private LinearLayout llayout;
     private DatabaseReference ref;
     private List<HashMap<String,String>> list = new ArrayList<>();
-    ArrayList<String> someWordlist = new ArrayList<>();
+    private String meaning,example;
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -73,12 +75,23 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    public void viewWords(String newWrd){
+    public void viewWords(final String newWrd, final String wrdMean, final String wrdEx){
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.dict_words,llayout,false);
         final TextView DictWord = view.findViewById(R.id.word);
 
         DictWord.setText(newWrd);
+        DictWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),detailed.class);
+                intent.putExtra("word",newWrd);
+                intent.putExtra("meaning",wrdMean);
+                intent.putExtra("example",wrdEx);
+                startActivity(intent);
+
+            }
+        });
         llayout.addView(view);
     }
 
@@ -100,32 +113,41 @@ public class HomeFragment extends Fragment {
                    map.put("Meaning", WordMeaning);
                    map.put("Example", WordEx);
                    list.add(map);
+
+                   Collections.sort(list, new  Comparator<HashMap<String, String>>(){
+                       public int compare(HashMap<String, String> i1, HashMap<String, String> i2){
+                           return i1.get("Word").compareTo(i2.get("Word"));
+                       }
+                   });
                }
 
-                someWordlist.clear();
+
+
                if (list.size() > 0){
                    for (int i = 0; i < list.size(); i++) {
                        HashMap<String, String> hash = list.get(i);
                        String word = hash.get("Word");
-                       someWordlist.add(word);
-                       Log.d("ok",someWordlist.get(i));
-                       String meaning = hash.get("Meaning");
-                       String example = hash.get("Example");
+                       meaning = hash.get("Meaning");
+                       example = hash.get("Example");
+                       viewWords(word,meaning,example);
 
                    }
-                    for (int s = 0; s < someWordlist.size(); s++){
-                        for (int j = s + 1; j < someWordlist.size(); j++){
-                            if (someWordlist.get(s).compareTo(someWordlist.get(j)) > 0){
-                                String temp = someWordlist.get(s);
-                                someWordlist.set(s,someWordlist.get(j));
-                                someWordlist.set(j,temp);
+//                    for (int s = 0; s < someWordlist.size(); s++){
+//                        for (int j = s + 1; j < someWordlist.size(); j++){
+//                            if (someWordlist.get(s).compareTo(someWordlist.get(j)) > 0){
+//                                String temp = someWordlist.get(s);
+//                                someWordlist.set(s,someWordlist.get(j));
+//                                someWordlist.set(j,temp);
+//
+//                            }
+//                        }
+//                        String word_list = someWordlist.get(s);
+//
+//                        viewWords(word_list,meaning,example);
+//                        Log.d("word",someWordlist.get(s));
+//                    }
+                  // Collections.sort(list, (i1, i2) -> i1.get("Word").compareTo(i2.get("Word")));
 
-                            }
-                        }
-                        String word_list = someWordlist.get(s);
-                        viewWords(word_list);
-                        Log.d("word",someWordlist.get(s));
-                    }
 
                }else{
                    Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();

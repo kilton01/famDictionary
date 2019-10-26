@@ -3,4 +3,68 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimary" >
+
+        <TextView
+            android:id="@+id/main_word"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WORD"
+            android:textSize="40dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/cardview_light_background"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Meaning"
+            android:textSize="30dp"
+            android:layout_margin="10dp"/>
+
+
+        <TextView
+            android:id="@+id/meaning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="I am the meaning of the word above"
+            android:textSize="23dp"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Example"
+            android:textSize="30dp"
+            android:layout_margin="10dp"/>
+
+
+        <TextView
+            android:id="@+id/examples"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="I am an example of the word above"
+            android:textSize="23dp"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+
 </LinearLayout>

@@ -3,14 +3,12 @@ package com.example.famdictionary.ui.home;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.famdictionary.R;
@@ -23,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.Random;
 
 public class new_vocab extends AppCompatActivity {
 
@@ -33,6 +30,7 @@ public class new_vocab extends AppCompatActivity {
     private Button Submit;
     private FirebaseDatabase database;
     private DatabaseReference ref,ref1;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +43,7 @@ public class new_vocab extends AppCompatActivity {
         wordDef = findViewById(R.id.word_def);
         wordEx = findViewById(R.id.word_ex);
         Submit = findViewById(R.id.upload_word);
+        progressBar = findViewById(R.id.pBar);
 
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("New Vocab");
@@ -56,8 +55,16 @@ public class new_vocab extends AppCompatActivity {
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String NewWord = newWord.getText().toString().substring(0,1).toUpperCase() +  newWord.getText().toString().substring(1).toLowerCase() ;
+                String WordDef = wordDef.getText().toString().substring(0,1).toUpperCase() + wordDef.getText().toString().substring(1).toLowerCase();
+                String WordEx = wordEx.getText().toString().substring(0,1).toUpperCase() + wordEx.getText().toString().substring(1).toLowerCase();
 
-                uploadToDic(newWord.getText().toString(),wordDef.getText().toString(),wordEx.getText().toString());
+                if (newWord.getText().toString().equals("") || wordDef.getText().toString().equals("") || wordEx.getText().toString().equals("")){
+                    Toast.makeText(new_vocab.this, "Input Data", Toast.LENGTH_SHORT).show();
+                }else{
+                    progressBar.setVisibility(View.VISIBLE);
+                    uploadToDic(NewWord,WordDef,WordEx);
+                }
 
 //                Intent intent = new Intent(new_vocab.this,HomeFragment.class);
 //                startActivity(intent);
@@ -101,5 +108,14 @@ public class new_vocab extends AppCompatActivity {
             }
         });
 
+        finish();
     }
+
+//    public static class details extends AppCompatActivity {
+//
+//        @Override
+//        protected void onCreate(Bundle savedInstanceState) {
+//            super.onCreate(savedInstanceState);
+//        }
+//    }
 }
