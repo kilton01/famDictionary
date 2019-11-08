@@ -1,5 +1,6 @@
 package com.example.famdictionary.ui.home;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.Sampler;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +37,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.zip.Inflater;
 
 public class HomeFragment extends Fragment {
 
@@ -42,14 +50,15 @@ public class HomeFragment extends Fragment {
     private List<HashMap<String,String>> list = new ArrayList<>();
     private String meaning,example;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+
+    public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView wordOfDay = root.findViewById(R.id.WOD);
         final TextView wordMeaning = root.findViewById(R.id.word_meaning);
-        final EditText search = root.findViewById(R.id.search);
-        final ImageView search_It = root.findViewById(R.id.search_it);
+        final SearchView search = root.findViewById(R.id.search);
         final Button add = root.findViewById(R.id.add_word);
+
         llayout = root.findViewById(R.id.main_layout);
 
         ref = FirebaseDatabase.getInstance().getReference("New Vocab");
@@ -66,13 +75,80 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        homeViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                llayout.removeAllViews();
+                String wrd = null;
+                if (!s.trim().isEmpty()) {
+
+                    List<HashMap<String, String>> queryList =  doSearch(s.substring(0,1).toUpperCase() +  s.substring(1).toLowerCase());
+
+                    if (queryList.size() > 0) {
+                        for (int i = 0; i < queryList.size(); i++) {
+                            HashMap<String, String> hash1 = queryList.get(i);
+                            wrd = hash1.get("Word");
+                            Log.d("logging",wrd);
+                            meaning = hash1.get("Meaning");
+                            example = hash1.get("Example");
+
+                            LayoutInflater inflater = LayoutInflater.from(getContext());
+                            View view = inflater.inflate(R.layout.search_list_view,llayout,false);
+                            TextView searchResult = view.findViewById(R.id.search_word);
+
+                            searchResult.setText(wrd);
+
+                            final String wwwd = wrd;
+                            searchResult.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getContext(), detailed.class);
+                                    intent.putExtra("word", wwwd);
+                                    intent.putExtra("meaning", meaning);
+                                    intent.putExtra("example", example);
+                                    startActivity(intent);
+
+                                }
+                            });
+                            llayout.addView(view);
+
+                        }
+                    }else {
+                        LayoutInflater inflater1 = LayoutInflater.from(getContext());
+                        View view1 = inflater1.inflate(R.layout.search_list_view,llayout,false);
+                        TextView searchResult = view1.findViewById(R.id.search_word);
+
+                        searchResult.setText("Word Not Found");
+
+                        llayout.addView(view1);
+                    }
+                }else{
+                    getWords();
+                }
+                return false;
+            }
+        });
         return root;
+    }
+
+
+
+    public List<HashMap<String, String>> doSearch(String query){
+        List<HashMap<String, String>> temp = new ArrayList<>();
+        for (HashMap<String, String> current: list){
+            String word = current.get("Word");
+            if(word.contains(query)) {
+                temp.add(current);
+            }
+        }
+        return temp;
     }
 
     public void viewWords(final String newWrd, final String wrdMean, final String wrdEx){
@@ -120,47 +196,22 @@ public class HomeFragment extends Fragment {
                        }
                    });
                }
-
-
-
                if (list.size() > 0){
                    for (int i = 0; i < list.size(); i++) {
                        HashMap<String, String> hash = list.get(i);
                        String word = hash.get("Word");
                        meaning = hash.get("Meaning");
                        example = hash.get("Example");
+
                        viewWords(word,meaning,example);
-
                    }
-//                    for (int s = 0; s < someWordlist.size(); s++){
-//                        for (int j = s + 1; j < someWordlist.size(); j++){
-//                            if (someWordlist.get(s).compareTo(someWordlist.get(j)) > 0){
-//                                String temp = someWordlist.get(s);
-//                                someWordlist.set(s,someWordlist.get(j));
-//                                someWordlist.set(j,temp);
-//
-//                            }
-//                        }
-//                        String word_list = someWordlist.get(s);
-//
-//                        viewWords(word_list,meaning,example);
-//                        Log.d("word",someWordlist.get(s));
-//                    }
-                  // Collections.sort(list, (i1, i2) -> i1.get("Word").compareTo(i2.get("Word")));
-
-
                }else{
                    Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();
                }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
-
-
 }

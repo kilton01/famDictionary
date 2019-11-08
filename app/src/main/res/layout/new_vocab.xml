@@ -28,7 +28,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="All definitions here were written by people like you. It's your turn to add"
+        android:text="Note that alot of different people from different background will be using this
+platform, so be concise with your definition and examples and make it as understandable as possible.."
         android:layout_margin="10dp"/>
 
     <EditText
@@ -44,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="3"
-        android:hint="Example of how word can be used."
+        android:hint="Example of how word can be used. eg."
         android:layout_margin="10dp"/>
 
     <TextView
@@ -70,3 +71,4 @@
         android:visibility="gone"/>
 
 </LinearLayout>
+
