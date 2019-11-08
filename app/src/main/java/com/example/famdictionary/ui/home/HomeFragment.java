@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
@@ -49,6 +50,7 @@ public class HomeFragment extends Fragment {
     private DatabaseReference ref;
     private List<HashMap<String,String>> list = new ArrayList<>();
     private String meaning,example;
+    private Random randomizeWord = new Random();
 
 
     public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +65,17 @@ public class HomeFragment extends Fragment {
 
         ref = FirebaseDatabase.getInstance().getReference("New Vocab");
         getWords();
+
+//        if (list.size() != 0){
+//            HashMap<String, String> DaysWord = list.get(0);
+//            String wordDay = DaysWord.get("Word");
+//            Log.d("wod",wordDay);
+//            String wordDayMeaning = DaysWord.get("Meaning");
+//
+//            wordOfDay.setText(wordDay);
+//            wordMeaning.setText(wordDayMeaning);
+//        }
+
 
         wordOfDay.setText("Desiree");
         wordMeaning.setText("Beautiful");
@@ -89,7 +102,7 @@ public class HomeFragment extends Fragment {
                 String wrd = null;
                 if (!s.trim().isEmpty()) {
 
-                    List<HashMap<String, String>> queryList =  doSearch(s.substring(0,1).toUpperCase() +  s.substring(1).toLowerCase());
+                    List<HashMap<String, String>> queryList =  doSearch(s.trim());
 
                     if (queryList.size() > 0) {
                         for (int i = 0; i < queryList.size(); i++) {
@@ -118,7 +131,6 @@ public class HomeFragment extends Fragment {
                                 }
                             });
                             llayout.addView(view);
-
                         }
                     }else {
                         LayoutInflater inflater1 = LayoutInflater.from(getContext());
@@ -144,7 +156,7 @@ public class HomeFragment extends Fragment {
         List<HashMap<String, String>> temp = new ArrayList<>();
         for (HashMap<String, String> current: list){
             String word = current.get("Word");
-            if(word.contains(query)) {
+            if(word.toUpperCase().contains(query.toUpperCase())) {
                 temp.add(current);
             }
         }
@@ -213,5 +225,17 @@ public class HomeFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public void wordOftheDay(){
+        Random randomizeWord = new Random();
+        for(int i = 0; i < list.size(); i++){
+            HashMap<String, String> DaysWord = list.get(i);
+            String wordDay = DaysWord.get("Word");
+            String wordDayMeaning = DaysWord.get("Meaning");
+
+
+
+        }
     }
 }
