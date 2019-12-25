@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:text="WORD"
             android:textSize="40dp"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="bottom"
             android:textColor="@color/cardview_light_background"
             android:layout_margin="10dp"/>
 
@@ -23,7 +23,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="20dp">
 
@@ -47,7 +47,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="20dp">
 

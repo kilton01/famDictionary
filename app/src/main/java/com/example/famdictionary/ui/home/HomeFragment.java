@@ -51,13 +51,14 @@ public class HomeFragment extends Fragment {
     private List<HashMap<String,String>> list = new ArrayList<>();
     private String meaning,example;
     private Random randomizeWord = new Random();
+    private TextView wordOfDay,wordMeaning;
 
 
     public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView wordOfDay = root.findViewById(R.id.WOD);
-        final TextView wordMeaning = root.findViewById(R.id.word_meaning);
+        wordOfDay = root.findViewById(R.id.WOD);
+        wordMeaning = root.findViewById(R.id.word_meaning);
         final SearchView search = root.findViewById(R.id.search);
         final Button add = root.findViewById(R.id.add_word);
 
@@ -216,6 +217,7 @@ public class HomeFragment extends Fragment {
                        example = hash.get("Example");
 
                        viewWords(word,meaning,example);
+                       wordOftheDay();
                    }
                }else{
                    Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();
@@ -227,15 +229,24 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    public static int getRandomRange(int min, int max){
+        if (min >= max){
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random random = new Random();
+        return random.nextInt((max-min)+1)+min;
+    }
     public void wordOftheDay(){
-        Random randomizeWord = new Random();
-        for(int i = 0; i < list.size(); i++){
-            HashMap<String, String> DaysWord = list.get(i);
+        int r = getRandomRange(0,list.size()-1);
+            HashMap<String, String> DaysWord = list.get(r);
             String wordDay = DaysWord.get("Word");
             String wordDayMeaning = DaysWord.get("Meaning");
 
+//            Log.d("Word", wordDay);
+//            Log.d("Word", wordDayMeaning);
+            wordOfDay.setText(wordDay);
+            wordMeaning.setText(wordDayMeaning);
 
-
-        }
     }
 }
