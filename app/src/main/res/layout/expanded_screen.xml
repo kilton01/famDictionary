@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/colorPrimary" >
+        android:background="@color/cardview_dark_background" >
 
         <TextView
             android:id="@+id/main_word"
@@ -14,7 +14,8 @@
             android:layout_height="wrap_content"
             android:text="WORD"
             android:textSize="40dp"
-            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:textColor="@color/cardview_light_background"
             android:layout_margin="10dp"/>
 
@@ -30,6 +31,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Definition"
             android:textSize="26dp"
             android:layout_margin="10dp"/>
@@ -37,8 +39,10 @@
 
         <TextView
             android:id="@+id/meaning"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
             android:hint="I am the meaning of the word above"
             android:textSize="20dp"
             android:layout_margin="10dp"/>
@@ -56,6 +60,7 @@
             android:layout_height="wrap_content"
             android:text="Example"
             android:textSize="26dp"
+            android:textColor="@color/black"
             android:layout_margin="10dp"/>
 
 
@@ -63,8 +68,10 @@
             android:id="@+id/examples"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:hint="I am an example of the word above"
             android:textSize="20dp"
+            style="@style/EditTextStyle"
             android:layout_margin="10dp"/>
 
     </LinearLayout>

@@ -67,17 +67,6 @@ public class HomeFragment extends Fragment {
         ref = FirebaseDatabase.getInstance().getReference("New Vocab");
         getWords();
 
-//        if (list.size() != 0){
-//            HashMap<String, String> DaysWord = list.get(0);
-//            String wordDay = DaysWord.get("Word");
-//            Log.d("wod",wordDay);
-//            String wordDayMeaning = DaysWord.get("Meaning");
-//
-//            wordOfDay.setText(wordDay);
-//            wordMeaning.setText(wordDayMeaning);
-//        }
-
-
         wordOfDay.setText("Desiree");
         wordMeaning.setText("Beautiful");
 
@@ -170,6 +159,7 @@ public class HomeFragment extends Fragment {
         final TextView DictWord = view.findViewById(R.id.word);
 
         DictWord.setText(newWrd);
+
         DictWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

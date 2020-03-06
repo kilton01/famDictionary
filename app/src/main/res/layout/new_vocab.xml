@@ -1,74 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Word"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_margin="10dp"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="All definitions here were written by people like you. It's your turn to add"
-        android:layout_margin="10dp"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/new_word"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="New Word"
-        android:lines="3"
-        android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Word"
+            android:textSize="24dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_margin="10dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Note that alot of different people from different background will be using this
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="All definitions here were written by people like you. It's your turn to add"
+            android:layout_margin="10dp"
+            android:textSize="18dp"
+            android:textStyle="italic"/>
+
+        <EditText
+            android:id="@+id/new_word"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="New Word"
+            style="@style/EditTextStyle"
+            android:lines="3"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:textSize="18dp"
+            android:text="Note that alot of different people from different background will be using this
 platform, so be concise with your definition and examples and make it as understandable as possible.."
-        android:layout_margin="10dp"/>
+            android:layout_margin="10dp"/>
 
-    <EditText
-        android:id="@+id/word_def"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="3"
-        android:hint="Type your definition here....."
-        android:layout_margin="10dp"/>
+        <EditText
+            android:id="@+id/word_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="3"
+            style="@style/EditTextStyle"
+            android:hint="Type your definition here....."
+            android:layout_margin="10dp"/>
 
-    <EditText
-        android:id="@+id/word_ex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="3"
-        android:hint="Example of how word can be used. eg."
-        android:layout_margin="10dp"/>
+        <EditText
+            android:id="@+id/word_ex"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="3"
+            android:hint="Example of how word can be used. eg."
+            android:layout_margin="10dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thank you for adding. Hit Submit to be a part of this great community"
-        android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textStyle="italic"
+            android:text="Thank you for adding. Hit Submit to be a part of this great community"
+            android:layout_margin="10dp"/>
 
-    <Button
-        android:id="@+id/upload_word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Submit"
-        android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/upload_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginBottom="20dp"
+            style="@style/Button"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_gravity="center"/>
 
-    <ProgressBar
-        android:id="@+id/pBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/colorPrimary"
-        android:visibility="gone"/>
+        <ProgressBar
+            android:id="@+id/pBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/cardview_dark_background"
+            android:visibility="gone"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
 
