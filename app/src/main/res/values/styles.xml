@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/cardview_dark_background</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">@color/black</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

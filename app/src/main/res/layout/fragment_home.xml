@@ -78,8 +78,10 @@
             android:id="@+id/add_word"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/cardview_dark_background"
-            android:textColor="@color/white"
+            android:elevation="6dp"
+            android:layout_marginRight="10dp"
+            style="@style/Button"
+            android:textColor="@color/black"
             android:layout_weight="0.5"
             android:text="ADD" />
 

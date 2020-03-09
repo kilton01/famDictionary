@@ -24,6 +24,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.famdictionary.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,13 +52,17 @@ public class HomeFragment extends Fragment {
     private DatabaseReference ref;
     private List<HashMap<String,String>> list = new ArrayList<>();
     private String meaning,example;
-    private Random randomizeWord = new Random();
     private TextView wordOfDay,wordMeaning;
+    private FirebaseUser user;
 
 
     public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ref = FirebaseDatabase.getInstance().getReference("New Vocab");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
         wordOfDay = root.findViewById(R.id.WOD);
         wordMeaning = root.findViewById(R.id.word_meaning);
         final SearchView search = root.findViewById(R.id.search);
@@ -64,7 +70,6 @@ public class HomeFragment extends Fragment {
 
         llayout = root.findViewById(R.id.main_layout);
 
-        ref = FirebaseDatabase.getInstance().getReference("New Vocab");
         getWords();
 
         wordOfDay.setText("Desiree");
@@ -73,8 +78,13 @@ public class HomeFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),new_vocab.class);
-                startActivity(intent);
+                if (user != null){
+                    Intent intent = new Intent(getContext(),new_vocab.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(getContext(),LoginScreen.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -206,7 +216,7 @@ public class HomeFragment extends Fragment {
                        meaning = hash.get("Meaning");
                        example = hash.get("Example");
 
-                       viewWords(word,meaning,example);
+//                       viewWords(word,meaning,example);
                        wordOftheDay();
                    }
                }else{
@@ -227,6 +237,7 @@ public class HomeFragment extends Fragment {
         Random random = new Random();
         return random.nextInt((max-min)+1)+min;
     }
+
     public void wordOftheDay(){
         int r = getRandomRange(0,list.size()-1);
             HashMap<String, String> DaysWord = list.get(r);

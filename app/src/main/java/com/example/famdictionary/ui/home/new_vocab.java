@@ -37,7 +37,7 @@ public class new_vocab extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_vocab);
         setTitle("Add Word");
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         newWord = findViewById(R.id.new_word);
         wordDef = findViewById(R.id.word_def);
@@ -55,20 +55,16 @@ public class new_vocab extends AppCompatActivity {
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String NewWord = newWord.getText().toString().substring(0,1).toUpperCase() +  newWord.getText().toString().substring(1).toLowerCase() ;
-                String WordDef = wordDef.getText().toString().substring(0,1).toUpperCase() + wordDef.getText().toString().substring(1).toLowerCase();
-                String WordEx = wordEx.getText().toString().substring(0,1).toUpperCase() + wordEx.getText().toString().substring(1).toLowerCase();
-
-                if (newWord.getText().toString().equals("") || wordDef.getText().toString().equals("") || wordEx.getText().toString().equals("")){
+                if (newWord.getText().toString().isEmpty() || wordDef.getText().toString().isEmpty() || wordEx.getText().toString().isEmpty()){
                     Toast.makeText(new_vocab.this, "Input Data", Toast.LENGTH_SHORT).show();
                 }else{
+                    String NewWord = newWord.getText().toString().substring(0,1).toUpperCase() +  newWord.getText().toString().substring(1).toLowerCase() ;
+                    String WordDef = wordDef.getText().toString().substring(0,1).toUpperCase() + wordDef.getText().toString().substring(1).toLowerCase();
+                    String WordEx = wordEx.getText().toString().substring(0,1).toUpperCase() + wordEx.getText().toString().substring(1).toLowerCase();
+
                     progressBar.setVisibility(View.VISIBLE);
                     uploadToDic(NewWord,WordDef,WordEx);
                 }
-
-//                Intent intent = new Intent(new_vocab.this,HomeFragment.class);
-//                startActivity(intent);
-//                finish();
             }
         });
 
@@ -111,11 +107,4 @@ public class new_vocab extends AppCompatActivity {
         finish();
     }
 
-//    public static class details extends AppCompatActivity {
-//
-//        @Override
-//        protected void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//        }
-//    }
 }
