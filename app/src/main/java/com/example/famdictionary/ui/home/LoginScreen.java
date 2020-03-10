@@ -1,16 +1,21 @@
 package com.example.famdictionary.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.famdictionary.MainActivity;
 import com.example.famdictionary.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,6 +29,7 @@ public class LoginScreen extends AppCompatActivity {
     private Button login;
     private TextView forgotPassword,signUp;
     private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,10 +43,12 @@ public class LoginScreen extends AppCompatActivity {
         login = findViewById(R.id.login);
         forgotPassword = findViewById(R.id.forgotPassword);
         signUp = findViewById(R.id.signUp);
+        progressBar = findViewById(R.id.progBar);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 String email = username.getText().toString().trim();
                 String passcode = password.getText().toString();
 
@@ -52,6 +60,9 @@ public class LoginScreen extends AppCompatActivity {
                         public void onSuccess(AuthResult authResult) {
                             Toast.makeText(LoginScreen.this, "Log In Successful", Toast.LENGTH_LONG).show();
                             finish();
+                            Intent intent = new Intent(LoginScreen.this, MainActivity.class);
+                            startActivity(intent);
+
                         }
                     }).addOnFailureListener(LoginScreen.this, new OnFailureListener() {
                         @Override
@@ -61,12 +72,29 @@ public class LoginScreen extends AppCompatActivity {
                     });
                 }
 
+
+
+            }
+        });
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginScreen.this, SignUpScreen.class);
+                startActivity(i);
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginScreen.this, forgetPasswordScreen.class);
+                startActivity(i);
             }
         });
 
 
 
+
     }
-
-
 }

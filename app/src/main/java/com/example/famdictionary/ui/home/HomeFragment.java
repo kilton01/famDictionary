@@ -1,6 +1,7 @@
 package com.example.famdictionary.ui.home;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.Sampler;
@@ -20,9 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.famdictionary.MainActivity;
 import com.example.famdictionary.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,15 +51,14 @@ import java.util.stream.Stream;
 import java.util.zip.Inflater;
 
 public class HomeFragment extends Fragment {
-
     private HomeViewModel homeViewModel;
     private LinearLayout llayout;
     private DatabaseReference ref;
     private List<HashMap<String,String>> list = new ArrayList<>();
     private String meaning,example;
     private TextView wordOfDay,wordMeaning;
+    private Button login,signup,signOut;
     private FirebaseUser user;
-
 
     public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -67,6 +71,9 @@ public class HomeFragment extends Fragment {
         wordMeaning = root.findViewById(R.id.word_meaning);
         final SearchView search = root.findViewById(R.id.search);
         final Button add = root.findViewById(R.id.add_word);
+        login = root.findViewById(R.id.login);
+        signup = root.findViewById(R.id.signup);
+        signOut = root.findViewById(R.id.signOut);
 
         llayout = root.findViewById(R.id.main_layout);
 
@@ -75,15 +82,54 @@ public class HomeFragment extends Fragment {
         wordOfDay.setText("Desiree");
         wordMeaning.setText("Beautiful");
 
+        if (user != null){
+            login.setVisibility(View.GONE);
+            signup.setVisibility(View.GONE);
+            signOut.setVisibility(View.VISIBLE);
+
+        }else {
+            login.setVisibility(View.VISIBLE);
+            signup.setVisibility(View.VISIBLE);
+            signOut.setVisibility(View.GONE);
+
+        }
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), LoginScreen.class);
+                startActivity(intent);
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),SignUpScreen.class);
+                startActivity(intent);
+            }
+        });
+
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (user != null){
                     Intent intent = new Intent(getContext(),new_vocab.class);
                     startActivity(intent);
+                    getActivity().finish();
                 }else{
                     Intent intent = new Intent(getContext(),LoginScreen.class);
                     startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -250,4 +296,15 @@ public class HomeFragment extends Fragment {
             wordMeaning.setText(wordDayMeaning);
 
     }
+
+
+//    public static void refreshFragment(FragmentActivity activity){
+//        Fragment fragment = null;
+//        fragment = activity.getSupportFragmentManager().findFragmentByTag("HomeFragment");
+//        final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+//        ft.detach(fragment);
+//        ft.attach(fragment);
+//        ft.commit();
+//    }
+
 }
